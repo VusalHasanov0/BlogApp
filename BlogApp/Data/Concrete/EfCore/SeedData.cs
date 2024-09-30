@@ -23,10 +23,11 @@ namespace BlogApp.Data.Concrete.EfCore
                 if(!context.Tags.Any())
                 {
                     context.Tags.AddRange(
-                        new Tag {Text = "web programlama"},
-                        new Tag {Text = "backend"},
-                        new Tag {Text = "frontend"},
-                        new Tag {Text = "fullstack"}
+                        new Tag {Text = "web programlama",Url = "web-programlama",Color = TagColors.warning},
+                        new Tag {Text = "backend",Url = "backend",Color = TagColors.info},
+                        new Tag {Text = "frontend",Url = "frontend",Color = TagColors.success},
+                        new Tag {Text = "fullstack",Url = "fullstack",Color = TagColors.secondary},
+                        new Tag {Text = "php",Url = "php",Color = TagColors.primary}
                     );
                     context.SaveChanges();
                 }
@@ -34,8 +35,8 @@ namespace BlogApp.Data.Concrete.EfCore
                 if (!context.Users.Any())
                 {
                     context.Users.AddRange(
-                        new User {UserName = "vusalhesenov"},
-                        new User {UserName = "testname2"}
+                        new User {UserName = "vusalhesenov",Image = "p1.jpg"},
+                        new User {UserName = "testname2",Image = "p2.jpg"}
                     );
                     context.SaveChanges();
                 }
@@ -45,27 +46,65 @@ namespace BlogApp.Data.Concrete.EfCore
                         new Post {
                             Title = "Asp.Net core",
                             Content = "Asp.Net core dersleri",
+                            Url = "aspnet-core",
                             IsActive = true,
+                            Image = "1.jpg",
                             PublishedOn = DateTime.UtcNow.AddDays(-10),
                             Tags = context.Tags.Take(3).ToList(),
-                            UserId = 1
+                            UserId = 1,
+                            Comments = new List<Comment> { new Comment {}}
                         },
                         new Post {
                             Title = "Php",
                             Content = "Php dersleri",
+                            Url = "php",
                             IsActive = true,
+                            Image = "2.jpg",
                             PublishedOn = DateTime.UtcNow.AddDays(-20),
                             Tags = context.Tags.Take(2).ToList(),
                             UserId = 1
                         },
                         new Post {
-                            Title = "Django core",
-                            Content = "Django core dersleri",
+                            Title = "Django",
+                            Content = "Django  dersleri",
+                            Url = "django",
                             IsActive = true,
-                            PublishedOn = DateTime.UtcNow.AddDays(5),
+                            Image = "3.jpg",
+                            PublishedOn = DateTime.UtcNow.AddDays(-5),
+                            Tags = context.Tags.Take(4).ToList(),
+                            UserId = 2
+                        },
+                        new Post {
+                            Title = "React",
+                            Content = "React dersleri",
+                            Url = "React",
+                            IsActive = true,
+                            Image = "1.jpg",
+                            PublishedOn = DateTime.UtcNow.AddDays(-40),
+                            Tags = context.Tags.Take(4).ToList(),
+                            UserId = 2
+                        },
+                        new Post {
+                            Title = "Angular",
+                            Content = "Angular dersleri",
+                            Url = "Angular",
+                            IsActive = true,
+                            Image = "2.jpg",
+                            PublishedOn = DateTime.UtcNow.AddDays(-50),
+                            Tags = context.Tags.Take(4).ToList(),
+                            UserId = 2
+                        },
+                        new Post {
+                            Title = "Web Tasarim",
+                            Content = "Web Tasarim dersleri",
+                            Url = "web-tasarim",
+                            IsActive = true,
+                            Image = "3.jpg",
+                            PublishedOn = DateTime.UtcNow.AddDays(-60),
                             Tags = context.Tags.Take(4).ToList(),
                             UserId = 2
                         }
+                        
                     );
                     context.SaveChanges();
                 }
