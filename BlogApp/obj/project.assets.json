@@ -2539,11 +2539,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hesen\\OneDrive\\Masaüstü\\aspnetcore-dersleri\\BlogApp\\BlogApp\\BlogApp.csproj",
+      "projectUniqueName": "c:\\Users\\hesen\\OneDrive\\Masaüstü\\BlogApp\\BlogApp\\BlogApp.csproj",
       "projectName": "BlogApp",
-      "projectPath": "C:\\Users\\hesen\\OneDrive\\Masaüstü\\aspnetcore-dersleri\\BlogApp\\BlogApp\\BlogApp.csproj",
+      "projectPath": "c:\\Users\\hesen\\OneDrive\\Masaüstü\\BlogApp\\BlogApp\\BlogApp.csproj",
       "packagesPath": "C:\\Users\\hesen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hesen\\OneDrive\\Masaüstü\\aspnetcore-dersleri\\BlogApp\\BlogApp\\obj\\",
+      "outputPath": "c:\\Users\\hesen\\OneDrive\\Masaüstü\\BlogApp\\BlogApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hesen\\AppData\\Roaming\\NuGet\\NuGet.Config",
