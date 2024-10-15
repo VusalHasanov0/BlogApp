@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using BlogApp.Data.Abstract;
 using BlogApp.Data.Concrete.EfCore;
@@ -25,7 +26,6 @@ namespace BlogApp.Controllers
 
         public async Task<IActionResult> Index(string tag)
         {
-            var claims = User.Claims;
             var posts =  _postrepository.Posts;
             if (!string.IsNullOrEmpty(tag))
             {
@@ -49,17 +49,26 @@ namespace BlogApp.Controllers
                     .FirstOrDefaultAsync(p=> p.Url == url));
         }
 
-        public IActionResult AddComment(int PostId,string UserName,string Text,string Url)
+        [HttpPost]
+        public JsonResult AddComment(int PostId,string Text,string Url)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var UserName =  User.FindFirstValue(ClaimTypes.Name);
+            var avatar =  User.FindFirstValue(ClaimTypes.UserData);
             var entity = new Comment{
+                PostId = PostId,
                 Text = Text,
                 PublishedOn = DateTime.Now,
-                PostId = PostId,
-                User = new User {UserName = UserName,Image = "avatar.jpg"}
+                UserId = int.Parse(userId ?? "")
             };
             _commentrepository.CreateComment(entity);
-            // return Redirect("/posts/details/" + Url);
-            return RedirectToRoute("post_details",new {url = Url});
+            
+            return Json(new {
+                UserName,
+                Text,
+                entity.PublishedOn,
+                avatar
+            });
         }
         
     }
