@@ -16,9 +16,9 @@ namespace BlogApp.Data.Concrete.EfCore
         }
         public IQueryable<Post> Posts => _context.Posts; 
 
-        public void Create(Post Post)
+        public void Create(Post post)
         {
-            _context.Add(Post);
+            _context.Posts.Add(post);
             _context.SaveChanges();
         }
     }
