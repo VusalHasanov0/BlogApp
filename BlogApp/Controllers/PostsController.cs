@@ -28,7 +28,7 @@ namespace BlogApp.Controllers
 
         public async Task<IActionResult> Index(string tag)
         {
-            var posts =  _postrepository.Posts;
+            var posts =  _postrepository.Posts.Where(i=>i.IsActive);
             if (!string.IsNullOrEmpty(tag))
             {
                 posts = posts.Where(x => x.Tags.Any(a => a.Url == tag));
@@ -116,6 +116,55 @@ namespace BlogApp.Controllers
             _postrepository.Posts.Where(x=>x.IsActive == true).ToList();
             return View(await posts.ToListAsync());
         }
+    
+        [Authorize]
+        public IActionResult Edit(int? id)
+        {
+            if (id == null) 
+            {
+                return NotFound();
+            }
+            var post = _postrepository.Posts.FirstOrDefault(i=>i.PostId == id); 
+
+            if (post == null) 
+            {
+                return NotFound();
+            }
+            return View(new PostCreateViewModel{
+                PostId = post.PostId,
+                Title = post.Title,
+                Description = post.Description,
+                Content = post.Content,
+                Url = post.Url,
+                IsActive = post.IsActive
+            });
+            
+        }
+
+        [Authorize]
+        [HttpPost]
         
+        public IActionResult Edit(PostCreateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var entityUpdate = new Post {
+                    PostId = model.PostId,
+                    Title = model.Title,
+                    Description = model.Description,
+                    Content = model.Content,
+                    Url = model.Url
+                };
+
+                if(User.FindFirstValue(ClaimTypes.Role) == "admin")
+                {
+                    entityUpdate.IsActive = model.IsActive;
+                }
+
+                _postrepository.EditPost(entityUpdate);
+                return RedirectToAction("List");
+            }
+            return View(model);
+        }
     }
 }

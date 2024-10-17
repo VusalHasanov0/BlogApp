@@ -11,5 +11,6 @@ namespace BlogApp.Data.Abstract
         IQueryable<Post> Posts { get; }
 
         void Create(Post Post);
+        void EditPost(Post Post);
     }
 }
