@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using BlogApp.Entity;
 
 namespace BlogApp.Model
 {
@@ -27,5 +28,6 @@ namespace BlogApp.Model
         [Display(Name = "Url")]
         public string? Url { get; set; }
         public bool   IsActive { get; set; }
+        public List<Tag> Tags { get; set; } = new();
     }
 }

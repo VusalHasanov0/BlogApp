@@ -12,5 +12,6 @@ namespace BlogApp.Data.Abstract
 
         void Create(Post Post);
         void EditPost(Post Post);
+        void EditPost(Post Post,int[] tagIds);
     }
 }

@@ -117,6 +117,28 @@ namespace BlogApp.Controllers
             return View(model);
         }
 
+        public  IActionResult Profile(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return NotFound();
+            }
+
+            var user = _userRepository
+                        .Users
+                        .Include(x=>x.Posts)
+                        .Include(x=>x.Comments)
+                        .ThenInclude(x=>x.Posts)
+                        .FirstOrDefault(x=>x.UserName == username);
+
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
         
 
 
